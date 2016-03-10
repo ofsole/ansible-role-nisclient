@@ -8,8 +8,13 @@
     group: root
     mode: 644
 
-- name: exec ypdomainname
-  command: ypdomainname {{ domainname }}
+- name: search ypdomainname
+  command: ypdomainname
+  register: ypdn
+
+- name: exec ypdmainname
+  command: ypdomainname {{domainname}}
+  when: "ypdn.stdout.find('{{domainname}}') == -1"
 
 - name: set nisdomain for redhat
   lineinfile:
@@ -19,12 +24,14 @@
     state: present
   when: ansible_os_family == 'RedHat'
 
-- name: set nisdomain for suse & ubuntu
+- name: set nisdomain for suse and ubuntu
   lineinfile:
     dest: /etc/defaultdomain
     line: "{{domainname}}\n"
     owner: root
     group: root
     mode: 644
+    create: yes
     state: present
-  when: ansible_os_family == 'Suse' or 'RedHat'
+  when: (ansible_os_family == 'Suse' ) or
+        (ansible_os_family == 'Debian' )
