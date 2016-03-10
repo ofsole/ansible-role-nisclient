@@ -1,6 +1,8 @@
 ansible-role-nisclient
 =========
 
+[![Build Status](https://travis-ci.org/ofsole/ansible-role-nisclient.png?branch=master)](https://travis-ci.org/ofsole/ansible-role-nisclient)
+
 ansible role to manage nisclient
 
 Requirements
@@ -34,7 +36,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - role: ssh
+         - role: ansible-role-nisclient
            broadcast: true
 
 License
