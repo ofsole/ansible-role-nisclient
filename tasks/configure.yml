@@ -1,0 +1,30 @@
+---
+
+- name: configure yp.conf file
+  template:
+    src: yp.conf.j2
+    dest: /etc/yp.conf
+    owner: root
+    group: root
+    mode: 644
+
+- name: exec ypdomainname
+  command: ypdomainname {{ domainname }}
+
+- name: set nisdomain for redhat
+  lineinfile:
+    dest: /etc/sysconfig/network
+    regexp: '^NISDOMAIN'
+    line:  "NISDOMAIN={{domainname}}"
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: set nisdomain for suse & ubuntu
+  lineinfile:
+    dest: /etc/defaultdomain
+    line: "{{domainname}}\n"
+    owner: root
+    group: root
+    mode: 644
+    state: present
+  when: ansible_os_family == 'Suse' or 'RedHat'

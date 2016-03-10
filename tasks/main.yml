@@ -1,0 +1,24 @@
+---
+# tasks file for ansible-role-nisclient
+
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include: ../../rpcbind/tasks/main.yml
+  when: (ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6') or
+        (ansible_os_family == 'Suse') or
+        (ansible_os_family == 'Debian')
+
+- fail: msg="nisclient supports osfamilies Debian, RedHat, and Suse on the Linux kernel. Detected osfamily is {{ansible_os_family}}"
+  failed_when: (ansible_os_family != 'RedHat') or 
+               (ansible_os_family != 'Suse') or
+               (ansible_os_family != 'Debian')
+
+- name: start to install nisclient
+  include: install.yml
+
+- name: configure nisclient
+  include: configure.yml
+
+- name: configure nisclient service
+  include: service.yml  

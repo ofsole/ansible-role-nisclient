@@ -1,0 +1,3 @@
+---
+package_name: 'nis'
+service_name: 'ypbind'

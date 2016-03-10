@@ -1,0 +1,19 @@
+---
+
+- name: install nisclient package
+  yum:
+    name: "{{ package_name }}"
+    state: "{{ package_state }}"
+  when: ansible_os_family == 'RedHat'
+
+- name: install nisclient package
+  zypper:
+    name: "{{ package_name }}"
+    state: "{{ package_state }}"
+  when: ansible_os_family == 'Suse'
+
+- name: install nisclient package
+  apt:
+    name: "{{ package_name }}"
+    state: "{{ package_state }}"
+  when: ansible_os_family == 'Debian'

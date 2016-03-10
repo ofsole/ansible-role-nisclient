@@ -1,0 +1,3 @@
+---
+package_name: 'ypbind'
+service_name: 'ypbind'
