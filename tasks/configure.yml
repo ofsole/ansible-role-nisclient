@@ -11,6 +11,7 @@
 - name: search ypdomainname
   command: ypdomainname
   register: ypdn
+  ignore_errors: true
 
 - name: exec ypdmainname
   command: ypdomainname {{domainname}}
