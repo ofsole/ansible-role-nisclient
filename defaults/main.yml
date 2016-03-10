@@ -2,8 +2,7 @@
 # defaults file for ansible-role-nisclient
 domainname: {{ ansible_domain }}
 server: '127.0.0.1'
-broadcase: false
+broadcast: false
 package_state: present
 service_state: started
 service_enabled: {{ 'yes' if service_state == 'started' else 'no' }}
-

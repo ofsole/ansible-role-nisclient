@@ -1,0 +1,7 @@
+# This file is being maintained by Asnible.
+# DO NOT EDIT
+{% if broadcast %}
+domain {{domainname}} broadcast
+{% else %}
+domain {{domainname}} server {{server}}
+{% end %}

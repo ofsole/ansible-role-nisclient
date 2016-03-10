@@ -1,7 +1,7 @@
-Role Name
+ansible-role-nisclient
 =========
 
-A brief description of the role goes here.
+ansible role to manage nisclient
 
 Requirements
 ------------
@@ -11,7 +11,16 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
+```
+# defaults file for ansible-role-nisclient
+domainname: {{ ansible_domain }}
+server: '127.0.0.1'
+broadcase: false
+package_state: present
+service_state: started
+service_enabled: {{ 'yes' if service_state == 'started' else 'no' }}
+```
 
 Dependencies
 ------------
@@ -25,7 +34,8 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: ssh
+           broadcast: true
 
 License
 -------
@@ -35,4 +45,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Elvis Cai
