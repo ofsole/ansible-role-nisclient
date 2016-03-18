@@ -12,10 +12,12 @@
   command: ypdomainname
   register: ypdn
   ignore_errors: true
+  changed_when: false
 
 - name: exec ypdmainname
   command: ypdomainname {{domainname}}
   when: "ypdn.stdout.find('{{domainname}}') == -1"
+  changed_when: false
 
 - name: set nisdomain for redhat
   lineinfile:
